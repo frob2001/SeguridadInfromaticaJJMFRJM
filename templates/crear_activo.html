@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/crear_activo.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" class="logoSentinels" alt="logo de Sentinels">
+        <form method="POST" action="{{ url_for('crear_activo') }}">
+            <section class="contenedorFormulario">
+                <h1 class="titulo">Ingreso de activos</h1>
+                    <div class="contenedorInterno">
+                        <div class="columna">
+                            <section class="tituloInput">
+                                <h1 class="titulos">ID</h1>
+                                <input type="text" id="id" name="id" placeholder="AAAA-####" required>
+                            </section>
+                            <section class="tituloInput">
+                                <h1 class="titulos">Área</h1>
+                                <input type="text" id="area" name="area" placeholder="Ej. Gerencia general" required>
+                            </section>
+                            <section class="tituloInput">
+                                <h1 class="titulos">Propietario</h1>
+                                <input type="text" id="propietario" name="propietario" placeholder="Ej. Gerente general" required>
+                            </section>
+                            <section class="tituloInput">
+                                <h1 class="titulos">Función</h1>
+                                <input type="text" id="funcion" name="funcion" placeholder="Ej. Auxiliar del trabajo del gerente" required>
+                            </section>
+                            <section class="tituloTextoSlider">
+                                <h1 class="titulos">Conexión</h1>
+                                <section class="contenedorSlider">
+                                    <p>¿Tiene acceso a internet?</p>
+                                    <div class="conjuntoSliderTexto">
+                                        <p>No</p>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="conexion" name="conexion" value="no">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <p>Sí</p>
+                                    </div>
+                                </section>
+                            </section>
+                        </div>
+                        <div class="columna">
+                            <section class="tituloInput">
+                                <h1 class="titulos">Criticidad</h1>
+                                <div class="containerInputs">
+                                    <p>
+                                        Cantidad, en dólares, que
+                                        representaría la pérdida,
+                                        alteración, o filtración del activo
+                                    </p>
+                                    <input type="number" id="criticidad" name="criticidad" min="1" required>
+                                </div>
+                            </section>
+                            <section class="tituloInput">
+                                <h1 class="titulos">Ubicación</h1>
+                                <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej. Oficina del gerente general" required>
+                            </section>
+                            <section class="tituloInput">
+                                <h1 class="titulos">Categoría</h1>
+                                <div class="containerInputs">
+                                    <p>
+                                        Seleccione una categoría:
+                                    </p>
+                                    <select name="categoria" id="categoria">
+                                        <option value="DC">DC (Documentación)</option>
+                                        <option value="SW">SW (Software) </option>
+                                        <option value="HW">DHWC (Hardware)</option>
+                                        <option value="R">R (Redes)</option>
+                                        <option value="P">P (Personal)</option>
+                                        <option value="DT">DT (Datos)</option>
+                                        <option value="DM">DM (Dominio o subdominio)</option>
+                                        <option value="IF">IF (instalaciones físicas)</option>
+                                        <option value="PI">PI (Propiedad intelectual)</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" name="categoria_text" id="categoria_text">
+                            </section>
+                            <section class="tituloInput">
+                                <h1 class="titulos">Clasificación</h1>
+                                <div class="containerInputs">
+                                    <p>
+                                        Seleccione el nivel de acceso que maneja el activo:
+                                    </p>
+                                    <select name="clasificacion" id="clasificacion">
+                                        <option value="clasificacionConfidencial">Confidencial</option>
+                                        <option value="clasificacionDifusiónLimitada">Difusión limitada</option>
+                                        <option value="clasificacionPública">Pública</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" name="clasificacion_text" id="clasificacion_text">
+                            </section>
+                        </div>
+                        <div class="columna">
+                            <section class="tituloInput">
+                                <h1 class="titulos">Valor</h1>
+                                <div class="containerInputs">
+                                    <p>
+                                        Cantidad, en dólares, por la que fue adquirido el activo:
+                                    </p>
+                                    <input type="number" id="valor" name="valor" min="1" required>
+                                </div>
+                            </section>
+                            <section class="tituloInput">
+                                <h1 class="titulos">Utilidad</h1>
+                                <div class="containerInputs">
+                                    <p>
+                                        Nivel de utilidad del activo para la empresa:
+                                    </p>
+                                    <select name="utilidad" id="utilidad">
+                                        <option value="utilidadBaja">Baja</option>
+                                        <option value="utilidadMedia">Media</option>
+                                        <option value="utilidadAlta">Alta</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" name="utilidad_text" id="utilidad_text">
+                            </section>
+                        </div>
+                    </div>
+                <button class="botonIngresar" type="submit">Ingresar activo</button>
+                <p class="mensaje">*Todos los campos son obligatorios </p>
+                <div class="back">
+                    <a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='images/atras.png') }}" alt="Imagen back"></a>
+                    <p>Cancelar</p>
+                </div>
+                <button type="button" class="botonCancelar"></button>
+            </section>
+        </form>
+        <script>
+            const form = document.querySelector('form');
+            form.addEventListener('submit', event => {
+                const select = document.querySelector('#categoria');
+                const selectedOptionText = select.options[select.selectedIndex].text;
+                const hiddenInput = document.querySelector('#categoria_text');
+                hiddenInput.value = selectedOptionText;
+
+                const select1 = document.querySelector('#clasificacion');
+                const selectedOptionText1 = select1.options[select.selectedIndex].text;
+                const hiddenInput1 = document.querySelector('#clasificacion_text');
+                hiddenInput1.value = selectedOptionText1;
+
+                const select2 = document.querySelector('#utilidad');
+                const selectedOptionText2 = select2.options[select.selectedIndex].text;
+                const hiddenInput2 = document.querySelector('#utilidad_text');
+                hiddenInput2.value = selectedOptionText2;
+            });
+        </script>
+    </body>
+</html>

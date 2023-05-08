@@ -27,7 +27,6 @@ def login():
                 print("Email is verified")
                 session['user'] = user['localId']
                 return redirect(url_for('dashboard'))
-                print("Redirecting to dashboard")
             else:
                 # Email is not verified, redirect user to a page informing them to verify their email
                 return render_template('login.html', message='El correo no ha sido verificado')
@@ -88,6 +87,35 @@ def reset_password():
 @login_required
 def dashboard():
     return render_template('dashboard.html')
+
+#Crear activo
+@app.route('/crear_activo', methods=['GET', 'POST'])
+@login_required
+def crear_activo():
+  if request.method == 'POST':
+      id = request.form['id']
+      area = request.form['area']
+      propietario = request.form['propietario']
+      funcion = request.form['funcion']
+      conexion = request.form.get('conexion')
+      if conexion:
+          conexion_value = 'si'
+      else:
+          conexion_value = 'no'
+      criticidad = request.form['criticidad']
+      ubicacion = request.form['ubicacion']
+      categoria = request.form.get('categoria_text')
+      clasificacion = request.form.get('clasificacion_text')
+      valor = request.form['valor']
+      utilidad = request.form.get('utilidad_text')
+
+      nuevo_activo = {"id": id, "area": area, "propietario": propietario, "funcion": funcion, "conexion": conexion_value, "criticidad ": criticidad, "ubicacion":ubicacion, "categoria": categoria, "clasificacion": clasificacion, "valor": valor, "utilidad": utilidad}
+      print(nuevo_activo)
+      #fdb.child("Activos").push(nuevo_activo)
+
+      return redirect(url_for('dashboard'))
+
+  return render_template('crear_activo.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

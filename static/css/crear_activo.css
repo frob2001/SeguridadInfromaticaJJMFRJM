@@ -1,0 +1,243 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.logoSentinels{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 7%;
+}
+
+.contenedorFormulario{
+    background-color: #0600C4;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    height: 80%;
+    width: 80%;
+    border-radius: 20px;
+    display: flex;
+}
+
+.titulo{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 36px;
+    color: white;
+    font-weight: 100;
+    position: absolute;
+    top: 30px;
+    left: 4%;
+}
+
+.contenedorInterno{
+    display: flex;
+    flex-direction: row;
+    margin-left: 4%;
+    margin-top: 100px;
+    width: 100%;
+    margin-right: 4%;
+    margin-bottom: 3%;
+    height: 70%;
+}
+
+.columna{
+    display: flex;
+    flex-direction: column;
+    width: 33.33%;
+    padding-right: 20px;
+}
+
+.tituloInput{
+    display: flex;
+    flex-direction: column;
+}
+
+.titulos{
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.tituloInput input{
+    font-family: 'Lato', sans-serif;
+    border: 0px;
+    width: 100%;
+    border-radius: 7px;
+    box-sizing: border-box;
+    font-size: 16px;
+    height: 40px;
+    padding-left: 5px;
+    margin-bottom: 30px;
+}
+
+.tituloInput select{
+    font-family: 'Lato', sans-serif;
+    border: 0px;
+    width: 100%;
+    border-radius: 7px;
+    box-sizing: border-box;
+    font-size: 16px;
+    height: 40px;
+    padding-left: 5px;
+    margin-bottom: 30px;
+}
+
+.tituloInput input:focus{
+    outline: none;
+}
+
+.tituloInput select:focus{
+    outline: none;
+}
+
+.contenedorSlider{
+    display: flex;
+    flex-direction: row;
+}
+
+.contenedorSlider p{
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: white;
+    align-self: flex-start;
+}
+
+.conjuntoSliderTexto{
+    display: flex;
+    flex-direction: row;
+    margin-left: 45%;
+}
+
+.conjuntoSliderTexto p{
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+  }
+  
+  .toggle-switch input[type="checkbox"] {
+    display: none;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 10px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 0px;
+    bottom: 0px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input[type="checkbox"]:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input[type="checkbox"]:checked + .slider:before {
+    transform: translateX(20px);
+  }
+
+
+.containerInputs{
+    display: flex;
+    flex-direction: row;    
+}
+
+.containerInputs p{
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    margin-right: 10px;
+    color: white;
+    width: 100%;
+    align-self: flex-start;
+} 
+
+.botonIngresar{
+    position:absolute;
+    font-family: 'Lato', sans-serif;
+    border: 0px;
+    border-radius: 7px;
+    box-sizing: border-box;
+    font-size: 16px;
+    height: 40px;
+    width: 150px;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.botonIngresar:hover{
+    cursor: pointer;
+}
+
+.mensaje{
+    position:absolute;
+    font-family: 'Lato', sans-serif;
+    color: white;
+    top: 91%;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 14px;
+}
+
+.back{
+    position:absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    top: 5%;
+    right: 4%;
+}
+
+.back img{
+    width: 30px;
+    height: 30px;
+}
+
+.back p{
+    font-family: 'Lato', sans-serif;
+    color: white;
+    margin-left: 5px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.botonCancelar{
+    background-color: transparent;
+    position:absolute;
+    border: 0px;
+    border-radius: 7px;
+    box-sizing: border-box;
+    height: 30px;
+    width: 110px;
+    top: 5%;
+    right: 4%;
+}
+
+.botonCancelar:hover{
+    cursor: pointer;
+}
