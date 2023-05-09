@@ -1,19 +1,19 @@
 $(document).ready(function () {
     // Setup - add a text input to each header cell
-    $('#example thead th').each(function () {
-        var title = $(this).text();
-        $(this).html('<input type="text" id="tableinput" placeholder="Buscar por ' + title + '" />' + "<p>" + title + "<p>")
-    });
+    // $('#example thead th').each(function () {
+    //     var title = $(this).text();
+    //     $(this).html('<input type="text" id="tableinput" placeholder="Buscar por ' + title + '" />' + "<p>" + title + "<p>")
+    // });
     
 
     // DataTable
     var table = $('#example').DataTable({
         //orden de la busqueda, informacion, paginas y longitud de datos
-        dom:"<'row'<'col-sm-12 col-md-6 my-2' fB><'col-sm-12 col-md-6'>>" +
+        dom:"<'row'<'col-sm-6 col-md-6 my-3' f><'col-sm-6 col-md-6 my-3' B>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-12 col-md-5'il><'col-sm-12 col-md-7 my-2 text-right'p>>",
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'excel', 'print'
         ],
         "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
 

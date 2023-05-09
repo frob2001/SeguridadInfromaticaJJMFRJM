@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Crear activo</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/crear_activo.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -142,12 +143,12 @@
                 hiddenInput.value = selectedOptionText;
 
                 const select1 = document.querySelector('#clasificacion');
-                const selectedOptionText1 = select1.options[select.selectedIndex].text;
+                const selectedOptionText1 = select1.options[select1.selectedIndex].text;
                 const hiddenInput1 = document.querySelector('#clasificacion_text');
                 hiddenInput1.value = selectedOptionText1;
 
                 const select2 = document.querySelector('#utilidad');
-                const selectedOptionText2 = select2.options[select.selectedIndex].text;
+                const selectedOptionText2 = select2.options[select2.selectedIndex].text;
                 const hiddenInput2 = document.querySelector('#utilidad_text');
                 hiddenInput2.value = selectedOptionText2;
             });

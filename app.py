@@ -86,7 +86,14 @@ def reset_password():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    datos = fdb.child("Activos").get().val()
+    print(datos) #Devuelve none en caso de no tener datos
+    # nombres = []
+    # if datos != None:
+    #     nombres = [d['criticidad'] for d in datos.values()]
+    # print(nombres)
+
+    return render_template('dashboard.html', datos=datos)
 
 #Crear activo
 @app.route('/crear_activo', methods=['GET', 'POST'])
@@ -102,16 +109,16 @@ def crear_activo():
           conexion_value = 'si'
       else:
           conexion_value = 'no'
-      criticidad = request.form['criticidad']
+      criticidad = float(request.form['criticidad'])
       ubicacion = request.form['ubicacion']
       categoria = request.form.get('categoria_text')
       clasificacion = request.form.get('clasificacion_text')
-      valor = request.form['valor']
+      valor = float(request.form['valor'])
       utilidad = request.form.get('utilidad_text')
 
-      nuevo_activo = {"id": id, "area": area, "propietario": propietario, "funcion": funcion, "conexion": conexion_value, "criticidad ": criticidad, "ubicacion":ubicacion, "categoria": categoria, "clasificacion": clasificacion, "valor": valor, "utilidad": utilidad}
+      nuevo_activo = {"id": id, "area": area, "propietario": propietario, "funcion": funcion, "conexion": conexion_value, "criticidad" : criticidad, "ubicacion":ubicacion, "categoria": categoria, "clasificacion": clasificacion, "valor": valor, "utilidad": utilidad}
       print(nuevo_activo)
-      #fdb.child("Activos").push(nuevo_activo)
+      fdb.child("Activos").push(nuevo_activo)
 
       return redirect(url_for('dashboard'))
 

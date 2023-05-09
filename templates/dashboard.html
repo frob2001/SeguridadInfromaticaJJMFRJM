@@ -64,6 +64,60 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
   <script src="{{ url_for('static', filename='js/table.js') }}"></script>
 
+  <style>
+    thead{
+        background: black;
+        color: white;
+    }
+    .dt-button {
+      display: inline-block;
+      padding: 0.5em 1em;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: white;
+      background-color: #0600c3;
+      border: 1px solid #0600c3;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+    
+    .dt-button:hover,
+    .dt-button:focus {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+    table {
+        border-collapse: collapse;
+      border-color: #787878;
+      width: 100%;
+    }
+    th{
+        text-align: left;
+        padding: 8px;
+    }
+    td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid;
+    }
+    h2, .h2{
+        margin: 0; /* Eliminar los márgenes predeterminados del h2 */
+        vertical-align: bottom;
+    }
+    @media (max-width: 768px) {
+
+        .tablediv{
+            overflow-x: auto;
+        }
+    }
+</style>
+
+
+
   <div class="tablediv">
     <table class="table-primary" id="example">
       <thead>
@@ -73,7 +127,7 @@
                 <th class="header">Propietario</th>
                 <th class="header">Funcion</th>
                 <th class="header">Conexión</th>
-                <th class="header">Calidad</th>
+                <th class="header">Criticidad</th>
                 <th class="header">Ubicación</th>
                 <th class="header">Categoria</th>
                 <th class="header">Clasificación</th>
@@ -84,13 +138,49 @@
         <tbody>
             {% if datos %}
             {% for key, value in datos.items() %}
-                <tr>
-                    <td class="data">{{ value['nombre'] }}</td>
-                    <td class="data">{{ value['direccion'] }}</td>
-                    <td style="width:25px">
-                        <a href="/detallessucursal/{{ key }}" class="btn btn-lightGray">Ver detalles</a>
-                    </td>
-                </tr>
+            <tr>
+                <td class="data">{{ value['id'] }}</td>
+                <td class="data">{{ value['area'] }}</td>
+                <td class="data">{{ value['propietario'] }}</td>
+                <td class="data">{{ value['funcion'] }}</td>
+                <td class="data">{{ value['conexion'] }}</td>
+                <td class="data">
+                    {% set criticidad = value['criticidad']%}
+                    {% if criticidad >= 5 and criticidad <= 500 %}
+                    1
+                    {% elif criticidad > 500 and criticidad <= 2000 %}
+                    2
+                    {% elif criticidad > 2000 and criticidad <= 10000 %}
+                    3
+                    {% elif criticidad > 10000 and criticidad <= 500000 %}
+                    4
+                    {% elif criticidad > 500000 %}
+                    5
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </td>
+                <td class="data">{{ value['ubicacion'] }}</td>
+                <td class="data">{{ value['categoria'] }}</td> 
+                <td class="data">{{ value['clasificacion'] }}</td>
+                <td class="data">
+                  {% set valor = value['valor']%}
+                  {% if valor >= 0 and valor <= 500 %}
+                  1
+                  {% elif valor > 500 and valor <= 2000 %}
+                  2
+                  {% elif valor > 2000 and valor <= 10000 %}
+                  3
+                  {% elif valor > 10000 and valor <= 500000 %}
+                  4
+                  {% elif valor > 500000 %}
+                  5
+                  {% else %}
+                  N/A
+                  {% endif %}
+              </td>
+                <td class="data">{{ value['utilidad'] }}</td>                    
+            </tr>
             {% endfor %}
             {% endif %}
         </tbody>
