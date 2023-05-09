@@ -194,6 +194,26 @@
     cursor: pointer;
 }
 
+.botonEliminar{
+    position:absolute;
+    font-family: 'Lato', sans-serif;
+    border: 0px;
+    border-radius: 7px;
+    box-sizing: border-box;
+    font-size: 16px;
+    height: 40px;
+    width: 150px;
+    top: 78%;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: red;
+    color: white;
+}
+
+.botonEliminar:hover{
+    cursor: pointer;
+}
+
 .mensaje{
     position:absolute;
     font-family: 'Lato', sans-serif;

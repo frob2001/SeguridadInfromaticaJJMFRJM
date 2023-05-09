@@ -1,3 +1,6 @@
+body {
+    overflow-x: hidden;
+  }
 .logo{
     display:flex;
     align-items: center;
@@ -32,12 +35,6 @@
 input{
     width: 100px;
 }
-.tablediv{
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
 
 .material-symbols-rounded {
@@ -47,4 +44,51 @@ input{
   'GRAD' 200,
   'opsz' 100;
   color:white;
+}
+
+thead{
+    background: black;
+    color: white;
+}
+.dt-button {
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background-color: #0600c3;
+  border: 1px solid #0600c3;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.dt-button:hover,
+.dt-button:focus {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+th{
+    text-align: left;
+    padding: 8px;
+    border: 1px solid black;
+}
+#example td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.tablediv {
+    margin-top: 25px; /* ajustar la altura según sea necesario */
+    margin-left: 100px;
+    margin-right: auto;
+  }
+@media (max-width: 768px) {
+
+    .tablediv{
+        overflow-x: auto;
+    }
 }

@@ -9,7 +9,7 @@ $(document).ready(function () {
     // DataTable
     var table = $('#example').DataTable({
         //orden de la busqueda, informacion, paginas y longitud de datos
-        dom:"<'row'<'col-sm-6 col-md-6 my-3' f><'col-sm-6 col-md-6 my-3' B>>" +
+        dom:"<'my-1' f><'my-1' B>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-12 col-md-5'il><'col-sm-12 col-md-7 my-2 text-right'p>>",
         buttons: [
@@ -56,9 +56,15 @@ $(document).ready(function () {
         buttons: [
             {
                 extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':not(:last-child)'
+                }
             },
             {
                 extend: 'print',
+                exportOptions: {
+                    columns: ':not(:last-child)'
+                }
             }
         ]
     });

@@ -87,12 +87,6 @@ def reset_password():
 @login_required
 def dashboard():
     datos = fdb.child("Activos").get().val()
-    print(datos) #Devuelve none en caso de no tener datos
-    # nombres = []
-    # if datos != None:
-    #     nombres = [d['criticidad'] for d in datos.values()]
-    # print(nombres)
-
     return render_template('dashboard.html', datos=datos)
 
 #Crear activo
@@ -105,10 +99,11 @@ def crear_activo():
       propietario = request.form['propietario']
       funcion = request.form['funcion']
       conexion = request.form.get('conexion')
+      print(conexion)
       if conexion:
-          conexion_value = 'si'
+          conexion_value = 'Sí'
       else:
-          conexion_value = 'no'
+          conexion_value = 'No'
       criticidad = float(request.form['criticidad'])
       ubicacion = request.form['ubicacion']
       categoria = request.form.get('categoria_text')
@@ -123,6 +118,47 @@ def crear_activo():
       return redirect(url_for('dashboard'))
 
   return render_template('crear_activo.html')
+
+#Detalles activo
+@app.route('/detallesactivo/<string:key>', methods=["GET", "POST"])
+@login_required
+def detalles_activo(key):
+    campo = fdb.child('Activos').child(key).get().val()
+    return render_template('detalles_activo.html', key=key, campo=campo)
+
+#Actualizar activo
+@app.route('/actualizaractivo/<string:key>', methods=["GET", "POST"])
+@login_required
+def actualizar_activo(key):
+  campo = fdb.child("Activos").child(key).get().val()
+  if request.method == "POST":
+    id = request.form['id']
+    area = request.form['area']
+    propietario = request.form['propietario']
+    funcion = request.form['funcion']
+    conexion = request.form.get('conexion')
+    if conexion:
+        conexion_value = 'Sí'
+    else:
+        conexion_value = 'No'
+    criticidad = float(request.form['criticidad'])
+    ubicacion = request.form['ubicacion']
+    categoria = request.form.get('categoria_text')
+    clasificacion = request.form.get('clasificacion_text')
+    valor = float(request.form['valor'])
+    utilidad = request.form.get('utilidad_text')
+
+    fdb.child("Activos").child(key).update({"id": id, "area": area, "propietario": propietario, "funcion": funcion, "conexion": conexion_value, "criticidad" : criticidad, "ubicacion":ubicacion, "categoria": categoria, "clasificacion": clasificacion, "valor": valor, "utilidad": utilidad})
+    return redirect(url_for('dashboard'))
+  else:
+    return render_template('detalles_activo.html', key=key, campo=campo)
+
+#eliminar activo
+@app.route('/eliminaractivo/<string:key>')
+@login_required
+def eliminar_activo(key):
+    fdb.child("Activos").child(key).remove()
+    return redirect(url_for('dashboard'))
 
 if __name__ == "__main__":
     app.run(debug=True)

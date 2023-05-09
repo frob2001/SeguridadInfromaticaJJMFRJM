@@ -49,10 +49,7 @@
 </ul>
 
 <body>
-  <div class="logo">
-    <img class="logo_img" src="../static/images/logo.png" alt="sentinel's logo">
-    <div class="logo_text">SENTINELS</div>
-  </div>
+  
 
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -64,59 +61,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
   <script src="{{ url_for('static', filename='js/table.js') }}"></script>
 
-  <style>
-    thead{
-        background: black;
-        color: white;
-    }
-    .dt-button {
-      display: inline-block;
-      padding: 0.5em 1em;
-      font-size: 1rem;
-      font-weight: 500;
-      line-height: 1;
-      text-align: center;
-      text-decoration: none;
-      text-transform: uppercase;
-      color: white;
-      background-color: #0600c3;
-      border: 1px solid #0600c3;
-      border-radius: 0.25rem;
-      cursor: pointer;
-    }
-    
-    .dt-button:hover,
-    .dt-button:focus {
-      background-color: #0069d9;
-      border-color: #0062cc;
-    }
-    table {
-        border-collapse: collapse;
-      border-color: #787878;
-      width: 100%;
-    }
-    th{
-        text-align: left;
-        padding: 8px;
-    }
-    td {
-        text-align: left;
-        padding: 8px;
-        border: 1px solid;
-    }
-    h2, .h2{
-        margin: 0; /* Eliminar los márgenes predeterminados del h2 */
-        vertical-align: bottom;
-    }
-    @media (max-width: 768px) {
 
-        .tablediv{
-            overflow-x: auto;
-        }
-    }
-</style>
-
-
+  <div class="logo">
+    <img class="logo_img" src="../static/images/logo.png" alt="sentinel's logo">
+    <div class="logo_text">SENTINELS</div>
+  </div>
 
   <div class="tablediv">
     <table class="table-primary" id="example">
@@ -133,6 +82,7 @@
                 <th class="header">Clasificación</th>
                 <th class="header">Valoración cuantitativa</th>
                 <th class="header">Valoración cualitativa</th>
+                <th class="header">Detalles</th>
             </tr>
         </thead>
         <tbody>
@@ -179,12 +129,16 @@
                   N/A
                   {% endif %}
               </td>
-                <td class="data">{{ value['utilidad'] }}</td>                    
+                <td class="data">{{ value['utilidad'] }}</td>
+                <td style="width:25px">
+                    <a href="/detallesactivo/{{ key }}">Ver detalles</a>
+                </td>                    
             </tr>
             {% endfor %}
             {% endif %}
         </tbody>
     </table>
+  </div>
 </body>
 
 </html>
