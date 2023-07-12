@@ -67,36 +67,75 @@
                     <input type="range" class="form-control-range" id="probabilidad" name="probabilidad" min="1" max="100">
                     <output id="probabilidad-output"></output>
                 </div>
+                <br>
+                <p> Es un valor entre 0.01 y 1.00 (1% - 100%), que representa la probabilidad
+                    promedio de que el activo esté expuesto a las amenazas establecidas como posibles de acuerdo
+                    con su categoría. Al valor mínimo es 1% debido a que, si bien la probabilidad de que una
+                    amenaza ocurra puede ser muy baja, esta nunca puede llegar a ser 0%.</p>
             </div>
 
             <div class="form-group">
                 <label for="preventivos">Preventivos</label>
                 <input type="range" class="form-control-range" id="preventivos" name="preventivos" min="0" max="19">
                 <output id="preventivos-output"></output>
+                <br>
+                <p>Firewalls, antivirus, control de accesos. Se debe atribuir un valor entre 0.00
+                    y 0.19 de acuerdo con la efectividad de los controles existentes dentro de esa categoría.
+                    0.00 es el valor atribuido si no existe ningún control existente dentro de esa categoría, y
+                    0.19 es la calificación máxima de efectividad que llegan a tener el o los controles
+                    existentes.</p>
             </div>
 
             <div class="form-group">
                 <label for="deteccion">Detección</label>
                 <input type="range" class="form-control-range" id="deteccion" name="deteccion" min="0" max="19">
                 <output id="deteccion-output"></output>
+                <br>
+                <p>Sistemas de monitoreo de red, IDS, Detectores de presencia. Se debe atribuir un valor entre 0.00
+                    y 0.19 de acuerdo con la efectividad de los controles existentes dentro de esa categoría.
+                    0.00 es el valor atribuido si no existe ningún control existente dentro de esa categoría, y
+                    0.19 es la calificación máxima de efectividad que llegan a tener el o los controles
+                    existentes.</p>
             </div>
 
             <div class="form-group">
                 <label for="correctivos">Correctivos</label>
                 <input type="range" class="form-control-range" id="correctivos" name="correctivos" min="0" max="19">
                 <output id="correctivos-output"></output>
+                <br>
+                <p>Actualización de Sistema Operativo, restauración
+                    copias de respaldo. Se debe atribuir un valor entre 0.00
+                    y 0.19 de acuerdo con la efectividad de los controles existentes dentro de esa categoría.
+                    0.00 es el valor atribuido si no existe ningún control existente dentro de esa categoría, y
+                    0.19 es la calificación máxima de efectividad que llegan a tener el o los controles
+                    existentes.</p>
             </div>
 
             <div class="form-group">
                 <label for="compensacion">Compensación</label>
                 <input type="range" class="form-control-range" id="compensacion" name="compensacion" min="0" max="19">
                 <output id="compensacion-output"></output>
+                <br>
+                <p>Copias de seguridad, Aislamiento del equipo
+                    (Servidores, Switches, Routers, etc). Se debe atribuir un valor entre 0.00
+                    y 0.19 de acuerdo con la efectividad de los controles existentes dentro de esa categoría.
+                    0.00 es el valor atribuido si no existe ningún control existente dentro de esa categoría, y
+                    0.19 es la calificación máxima de efectividad que llegan a tener el o los controles
+                    existentes.</p>
             </div>
 
             <div class="form-group">
                 <label for="fisicos">Físicos</label>
                 <input type="range" class="form-control-range" id="fisicos" name="fisicos" min="0" max="19">
                 <output id="fisicos-output"></output>
+                <br>
+                <p>Equipos con cerraduras, guardias, tarjetas de
+                    control de acceso, sistemas de control de acceso
+                    biométrico, cámaras de vigilancia, etc. Se debe atribuir un valor entre 0.00
+                    y 0.19 de acuerdo con la efectividad de los controles existentes dentro de esa categoría.
+                    0.00 es el valor atribuido si no existe ningún control existente dentro de esa categoría, y
+                    0.19 es la calificación máxima de efectividad que llegan a tener el o los controles
+                    existentes.</p>
             </div>
 
             <button type="submit" class="btn btn-primary" style="background-color: #0600c3;">Calcular Riesgo</button>
