@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Riesgo</title>
+</head>
+<body>
+    <h1>Tabla de Amenazas</h1>
+    <table>
+        <tr>
+            <th>Código</th>
+            <th>Amenaza</th>
+            <th>Vulnerabilidad</th>
+            <th>Calificación</th>
+        </tr>
+        {% for dato in datos %}
+            <tr>
+                <td>{{ dato.codigo.replace('_', '.') }}</td>
+                <td>{{ dato.amenaza }}</td>
+                <td>{{ dato.vulnerabilidad }}</td>
+                <td>{{ dato.calificacion }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+    <form method="POST" action="/calcular_riesgo/{{ key }}">
+        <div>
+            <label for="probabilidad">Probabilidad</label>
+            <input type="range" id="probabilidad" name="probabilidad" min="1" max="100">
+            <output id="probabilidad-output"></output>
+        </div>
+
+        <div>
+            <label for="preventivos">Preventivos</label>
+            <input type="range" id="preventivos" name="preventivos" min="0" max="19">
+            <output id="preventivos-output"></output>
+        </div>
+
+        <div>
+            <label for="deteccion">Detección</label>
+            <input type="range" id="deteccion" name="deteccion" min="0" max="19">
+            <output id="deteccion-output"></output>
+        </div>
+
+        <div>
+            <label for="correctivos">Correctivos</label>
+            <input type="range" id="correctivos" name="correctivos" min="0" max="19">
+            <output id="correctivos-output"></output>
+        </div>
+
+        <div>
+            <label for="compensacion">Compensación</label>
+            <input type="range" id="compensacion" name="compensacion" min="0" max="19">
+            <output id="compensacion-output"></output>
+        </div>
+
+        <div>
+            <label for="fisicos">Físicos</label>
+            <input type="range" id="fisicos" name="fisicos" min="0" max="19">
+            <output id="fisicos-output"></output>
+        </div>
+
+        <button type="submit">Calcular Riesgo</button>
+    </form>
+
+    <script>
+        const probabilidadSlider = document.querySelector('#probabilidad');
+        const probabilidadOutput = document.querySelector('#probabilidad-output');
+        probabilidadOutput.textContent = probabilidadSlider.value;
+        probabilidadSlider.addEventListener('input', () => {
+            probabilidadOutput.textContent = probabilidadSlider.value;
+        });
+
+        const preventivosSlider = document.querySelector('#preventivos');
+        const preventivosOutput = document.querySelector('#preventivos-output');
+        preventivosOutput.textContent = preventivosSlider.value;
+        preventivosSlider.addEventListener('input', () => {
+            preventivosOutput.textContent = preventivosSlider.value;
+        });
+
+        const deteccionSlider = document.querySelector('#deteccion');
+        const deteccionOutput = document.querySelector('#deteccion-output');
+        deteccionOutput.textContent = deteccionSlider.value;
+        deteccionSlider.addEventListener('input', () => {
+            deteccionOutput.textContent = deteccionSlider.value;
+        });
+
+        const correctivosSlider = document.querySelector('#correctivos');
+        const correctivosOutput = document.querySelector('#correctivos-output');
+        correctivosOutput.textContent = correctivosSlider.value;
+        correctivosSlider.addEventListener('input', () => {
+            correctivosOutput.textContent = correctivosSlider.value;
+        });
+
+        const compensacionSlider = document.querySelector('#compensacion');
+        const compensacionOutput = document.querySelector('#compensacion-output');
+        compensacionOutput.textContent = compensacionSlider.value;
+        compensacionSlider.addEventListener('input', () => {
+            compensacionOutput.textContent = compensacionSlider.value;
+        });
+
+        const fisicosSlider = document.querySelector('#fisicos');
+        const fisicosOutput = document.querySelector('#fisicos-output');
+        fisicosOutput.textContent = fisicosSlider.value;
+        fisicosSlider.addEventListener('input', () => {
+            fisicosOutput.textContent = fisicosSlider.value;
+        });
+    </script>
+</body>
+</html>

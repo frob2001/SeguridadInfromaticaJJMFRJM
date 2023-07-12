@@ -82,6 +82,8 @@
                 <th class="header">Clasificación</th>
                 <th class="header">Valoración cuantitativa</th>
                 <th class="header">Valoración cualitativa</th>
+                <th class="header">Riesgo</th>
+                <th class="header">Calcular riesgo</th>
                 <th class="header">Detalles</th>
             </tr>
         </thead>
@@ -128,8 +130,14 @@
                   {% else %}
                   N/A
                   {% endif %}
-              </td>
+                </td>
+                
                 <td class="data">{{ value['utilidad'] }}</td>
+                <td class="data">{% if value['riesgo'] %} {{ value['riesgo'] }} {% else %} N/A {% endif %}</td>
+
+                <td style="width:25px">
+                    <a href="/calcular_riesgo/{{ key }}">Riesgo</a>
+                </td>  
                 <td style="width:25px">
                     <a href="/detallesactivo/{{ key }}">Ver detalles</a>
                 </td>                    

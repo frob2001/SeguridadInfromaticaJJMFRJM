@@ -5,7 +5,6 @@ from config import auth, fdb
 app = Flask(__name__)
 app.secret_key = "seginf"
 
-#Final
 """"
 ⡍⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -160,7 +159,7 @@ def crear_activo():
       valor = float(request.form['valor'])
       utilidad = request.form.get('utilidad_text')
 
-      nuevo_activo = {"id": id, "area": area, "propietario": propietario, "funcion": funcion, "conexion": conexion_value, "criticidad" : criticidad, "ubicacion":ubicacion, "categoria": categoria, "clasificacion": clasificacion, "valor": valor, "utilidad": utilidad}
+      nuevo_activo = {"id": id, "area": area, "propietario": propietario, "funcion": funcion, "conexion": conexion_value, "criticidad" : criticidad, "ubicacion":ubicacion, "categoria": categoria, "clasificacion": clasificacion, "valor": valor, "utilidad": utilidad, "riesgo": ""}
       print(nuevo_activo)
       fdb.child("Activos").push(nuevo_activo)
 
@@ -197,7 +196,7 @@ def actualizar_activo(key):
     valor = float(request.form['valor'])
     utilidad = request.form.get('utilidad_text')
 
-    fdb.child("Activos").child(key).update({"id": id, "area": area, "propietario": propietario, "funcion": funcion, "conexion": conexion_value, "criticidad" : criticidad, "ubicacion":ubicacion, "categoria": categoria, "clasificacion": clasificacion, "valor": valor, "utilidad": utilidad})
+    fdb.child("Activos").child(key).update({"id": id, "area": area, "propietario": propietario, "funcion": funcion, "conexion": conexion_value, "criticidad" : criticidad, "ubicacion":ubicacion, "categoria": categoria, "clasificacion": clasificacion, "valor": valor, "utilidad": utilidad, "riesgo": ""})
     return redirect(url_for('dashboard'))
   else:
     return render_template('detalles_activo.html', key=key, campo=campo)
@@ -208,6 +207,85 @@ def actualizar_activo(key):
 def eliminar_activo(key):
     fdb.child("Activos").child(key).remove()
     return redirect(url_for('dashboard'))
+
+
+#Crear activo
+@app.route('/calcular_riesgo/<string:key>', methods=['GET', 'POST'])
+@login_required
+def calcular_riesgo(key):
+    activos = fdb.child("Activos").child(key).get().val()
+    categoria_activo = activos["categoria"]
+    if categoria_activo == "DC":
+        promedio = 4
+    elif categoria_activo == "SW":
+        promedio = 3.636
+    elif categoria_activo == "HW":
+        promedio = 3.444
+    elif categoria_activo == "R":
+        promedio = 3.875
+    elif categoria_activo == "P":
+        promedio = 4
+    elif categoria_activo == "IF":
+        promedio = 4
+    elif categoria_activo == "DT":
+        promedio = 3.667
+    elif categoria_activo == "DM":
+        promedio = 4.5
+
+    amenazas = fdb.child("Amenazas").get().val()
+    datos_filtrados = []
+
+    # Filtrar los datos según la categoría del activo
+    for codigo, amenaza in amenazas.items():
+        if amenaza.get(categoria_activo) == True:
+            datos_filtrados.append({
+                'codigo': codigo,
+                'amenaza': amenaza['Amenaza'],
+                'vulnerabilidad': amenaza['Vulnerabilidad'],
+                'calificacion': amenaza['Calificación']
+            })
+
+    print(datos_filtrados)
+
+
+    if request.method == "POST":
+        
+
+        probabilidad = float(request.form['probabilidad'])/100
+        
+        preventivos = float(request.form['preventivos'])/100
+        deteccion = float(request.form['deteccion'])/100
+        correctivos = float(request.form['correctivos'])/100
+        compensacion = float(request.form['compensacion'])/100
+        fisicos = float(request.form['fisicos'])/100
+
+        print(probabilidad, preventivos, deteccion, correctivos, compensacion, fisicos, promedio)
+
+        fe = preventivos + deteccion + correctivos + compensacion + fisicos
+
+        riesgo = ((probabilidad * promedio) + promedio) * (1-fe)
+
+        print(riesgo)
+
+        if riesgo <= 4.00:
+            nivel = "Bajo"
+        elif riesgo >= 4.01 and riesgo <= 7.00:
+            nivel = "Medio"
+        elif riesgo >= 7.01 and riesgo <= 9.00:
+            nivel = "Alto"
+        elif riesgo >= 9.01:
+            nivel = "Crítico"
+
+        print(nivel)
+
+        
+        fdb.child("Activos").child(key).update({"id": activos["id"], "area": activos["area"], "propietario": activos["propietario"], "funcion": activos["funcion"], "conexion": activos["conexion"], "criticidad" : activos["criticidad"], "ubicacion": activos["ubicacion"], "categoria": categoria_activo, "clasificacion": activos["clasificacion"], "valor": activos["valor"], "utilidad": activos["utilidad"], "riesgo": nivel})
+        return redirect(url_for('dashboard'))
+
+
+    else:
+        return render_template('riesgo.html', key=key, datos=datos_filtrados)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

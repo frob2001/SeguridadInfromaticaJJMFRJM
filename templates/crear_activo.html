@@ -134,24 +134,5 @@
                 <button type="button" class="botonCancelar"></button>
             </section>
         </form>
-        <script>
-            const form = document.querySelector('form');
-            form.addEventListener('submit', event => {
-                const select = document.querySelector('#categoria');
-                const selectedOptionText = select.options[select.selectedIndex].text.split(' ')[0];
-                const hiddenInput = document.querySelector('#categoria_text');
-                hiddenInput.value = selectedOptionText;
-
-                const select1 = document.querySelector('#clasificacion');
-                const selectedOptionText1 = select1.options[select1.selectedIndex].text;
-                const hiddenInput1 = document.querySelector('#clasificacion_text');
-                hiddenInput1.value = selectedOptionText1;
-
-                const select2 = document.querySelector('#utilidad');
-                const selectedOptionText2 = select2.options[select2.selectedIndex].text;
-                const hiddenInput2 = document.querySelector('#utilidad_text');
-                hiddenInput2.value = selectedOptionText2;
-            });
-        </script>
     </body>
 </html>
