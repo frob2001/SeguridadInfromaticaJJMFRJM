@@ -2,67 +2,112 @@
 <html>
 <head>
     <title>Calculadora de Riesgo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #0600c3;
+        }
+
+        table {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        th {
+            background-color: #0600c3;
+            color: #fff;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+        
+        
+
+    </style>
 </head>
 <body>
-    <h1>Tabla de Amenazas</h1>
-    <table>
-        <tr>
-            <th>Código</th>
-            <th>Amenaza</th>
-            <th>Vulnerabilidad</th>
-            <th>Calificación</th>
-        </tr>
-        {% for dato in datos %}
+    <a class="" href="/dashboard">Pagina principal</a>
+    <div class="container">
+        <h1>Tabla de Amenazas</h1>
+        <table class="table table-striped">
             <tr>
-                <td>{{ dato.codigo.replace('_', '.') }}</td>
-                <td>{{ dato.amenaza }}</td>
-                <td>{{ dato.vulnerabilidad }}</td>
-                <td>{{ dato.calificacion }}</td>
+                <th>Código</th>
+                <th>Amenaza</th>
+                <th>Vulnerabilidad</th>
+                <th>Calificación</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for dato in datos %}
+                <tr>
+                    <td>{{ dato.codigo.replace('_', '.') }}</td>
+                    <td>{{ dato.amenaza }}</td>
+                    <td>{{ dato.vulnerabilidad }}</td>
+                    <td>{{ dato.calificacion }}</td>
+                </tr>
+            {% endfor %}
+        </table>
 
+        <form method="POST" action="/calcular_riesgo/{{ key }}">
+            <div class="form-group">
+                <label for="probabilidad">Probabilidad</label>
+                <div class="slider-container">
+                    <input type="range" class="form-control-range" id="probabilidad" name="probabilidad" min="1" max="100">
+                    <output id="probabilidad-output"></output>
+                </div>
+            </div>
 
-    <form method="POST" action="/calcular_riesgo/{{ key }}">
-        <div>
-            <label for="probabilidad">Probabilidad</label>
-            <input type="range" id="probabilidad" name="probabilidad" min="1" max="100">
-            <output id="probabilidad-output"></output>
-        </div>
+            <div class="form-group">
+                <label for="preventivos">Preventivos</label>
+                <input type="range" class="form-control-range" id="preventivos" name="preventivos" min="0" max="19">
+                <output id="preventivos-output"></output>
+            </div>
 
-        <div>
-            <label for="preventivos">Preventivos</label>
-            <input type="range" id="preventivos" name="preventivos" min="0" max="19">
-            <output id="preventivos-output"></output>
-        </div>
+            <div class="form-group">
+                <label for="deteccion">Detección</label>
+                <input type="range" class="form-control-range" id="deteccion" name="deteccion" min="0" max="19">
+                <output id="deteccion-output"></output>
+            </div>
 
-        <div>
-            <label for="deteccion">Detección</label>
-            <input type="range" id="deteccion" name="deteccion" min="0" max="19">
-            <output id="deteccion-output"></output>
-        </div>
+            <div class="form-group">
+                <label for="correctivos">Correctivos</label>
+                <input type="range" class="form-control-range" id="correctivos" name="correctivos" min="0" max="19">
+                <output id="correctivos-output"></output>
+            </div>
 
-        <div>
-            <label for="correctivos">Correctivos</label>
-            <input type="range" id="correctivos" name="correctivos" min="0" max="19">
-            <output id="correctivos-output"></output>
-        </div>
+            <div class="form-group">
+                <label for="compensacion">Compensación</label>
+                <input type="range" class="form-control-range" id="compensacion" name="compensacion" min="0" max="19">
+                <output id="compensacion-output"></output>
+            </div>
 
-        <div>
-            <label for="compensacion">Compensación</label>
-            <input type="range" id="compensacion" name="compensacion" min="0" max="19">
-            <output id="compensacion-output"></output>
-        </div>
+            <div class="form-group">
+                <label for="fisicos">Físicos</label>
+                <input type="range" class="form-control-range" id="fisicos" name="fisicos" min="0" max="19">
+                <output id="fisicos-output"></output>
+            </div>
 
-        <div>
-            <label for="fisicos">Físicos</label>
-            <input type="range" id="fisicos" name="fisicos" min="0" max="19">
-            <output id="fisicos-output"></output>
-        </div>
+            <button type="submit" class="btn btn-primary" style="background-color: #0600c3;">Calcular Riesgo</button>
 
-        <button type="submit">Calcular Riesgo</button>
-    </form>
+            <br>
+            <br>
+            <br>
+        </form>
+    </div>
 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
         const probabilidadSlider = document.querySelector('#probabilidad');
         const probabilidadOutput = document.querySelector('#probabilidad-output');
