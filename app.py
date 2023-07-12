@@ -234,6 +234,7 @@ def calcular_riesgo(key):
 
     amenazas = fdb.child("Amenazas").get().val()
     datos_filtrados = []
+    codigos = []
 
     # Filtrar los datos según la categoría del activo
     for codigo, amenaza in amenazas.items():
@@ -244,8 +245,17 @@ def calcular_riesgo(key):
                 'vulnerabilidad': amenaza['Vulnerabilidad'],
                 'calificacion': amenaza['Calificación']
             })
+            codigos.append(codigo)
+    
+    print(codigos)
 
-    print(datos_filtrados)
+    medidas = fdb.child("Medidas").get().val()
+
+    medidas_filtradas = {codigo: medidas[codigo] for codigo in codigos if codigo in medidas}
+
+    print(medidas_filtradas)
+
+
 
 
     if request.method == "POST":
@@ -278,9 +288,11 @@ def calcular_riesgo(key):
 
         print(nivel)
 
+        riesgo = round(riesgo, 2)
+
         
         fdb.child("Activos").child(key).update({"id": activos["id"], "area": activos["area"], "propietario": activos["propietario"], "funcion": activos["funcion"], "conexion": activos["conexion"], "criticidad" : activos["criticidad"], "ubicacion": activos["ubicacion"], "categoria": categoria_activo, "clasificacion": activos["clasificacion"], "valor": activos["valor"], "utilidad": activos["utilidad"], "riesgo": nivel})
-        return redirect(url_for('dashboard'))
+        return render_template('calificacion.html', nivel=nivel, riesgo=riesgo, medidas=medidas_filtradas)
 
 
     else:

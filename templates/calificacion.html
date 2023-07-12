@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tabla de Medidas</title>
+</head>
+<body>
+    <h1>La calificación del riesgo es</h1>
+    <h2> {{ riesgo }} <h2>
+
+    <h1>El nivel de riesgo es</h1>
+    <h2> {{ nivel }} <h2>
+
+    <table>
+        <tr>
+            <th>Código</th>
+            <th>Medida</th>
+        </tr>
+        {% for codigo, medida in medidas.items() %}
+            <tr>
+                <td> {{ codigo.replace('_', '.') }} </td>
+                <td> {{ medida[0] }} <br><br> {{ medida[1] }} <br><br> {{ medida[2] }} </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
