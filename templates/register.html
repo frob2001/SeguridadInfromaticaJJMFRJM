@@ -44,11 +44,12 @@
                       </div>
                       <div class="form-outline form-white mb-2">
                         <label class="form-label text-primary" for="typePasswordX">Contraseña</label>
-                        <input type="password" id="typePasswordX" name="password" class="form-control form-control-lg" required/>
+                        <input type="password" id="typePasswordX" name="password" class="form-control form-control-lg" pattern=".{5,}" title="Debe contener al menos 5 caracteres" required/>
+
                       </div>
                       <div class="form-outline form-white mb-2">
                         <label class="form-label text-primary" for="typePasswordX">Confirma tu contraseña</label>
-                        <input type="password" id="typePasswordX" name="confirm_password" class="form-control form-control-lg" required/>
+                        <input type="password" id="typePasswordX" name="confirm_password" class="form-control form-control-lg" pattern=".{5,}" title="Debe contener al menos 5 caracteres" required/>
                       </div>
                       <div class="form-outline form-white mb-5">
                         <label class="form-label text-primary" for="typeTelX">Número de teléfono</label>
