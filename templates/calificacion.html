@@ -71,22 +71,22 @@
         <a class="" href="/dashboard">Pagina principal</a>
 
         <div class="puntuacion">
-            <h1>Calificación de riesgo:</h1>
-            <p>{{ riesgo }}</p>
+            <p style="font-size: 30px">Calificación de riesgo:</p>
+            <h1>{{ riesgo }}</h1>
         </div>
 
 
 
         <div class="puntuacion">
-            <h1>Nivel de riesgo:</h1>
-            <p>{{ nivel }}</p>
+            <p style="font-size: 30px">Nivel de riesgo:</p>
+            <h1>{{ nivel }}</h1>
         </div>
 
         <br>
         <br>
         <br>
 
-        <h2>Para mejorar el nivel de seguridad y evitar riesgo toma en cuenta las siguientes recomendaciones: </h2>
+        <h2>Para reducir el nivel de riesgo sobre tu activo de información, toma en cuenta las siguientes recomendaciones, después vuelve a evaluar el nivel de riesgo: </h2>
         
         <br>
         <br>
@@ -122,7 +122,7 @@
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable({
-                dom:"<'my-1' f><'my-1' B>" +
+                dom:"<'my-1' ><'my-1' B>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-12 col-md-5'il><'col-sm-12 col-md-7 my-2 text-right'p>>",
                 buttons: [
